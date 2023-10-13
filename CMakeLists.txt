@@ -8,9 +8,15 @@ set (SRC_DIR ${DL_DIR}/modbus)
 set (MODBUS_LIB ${BUILD_DIR}/lib/libmodbus.a)
 set (MODBUS_INC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
-set (CONFIGURE ./configure --prefix=${BUILD_DIR}  --enable-static --disable-shared --disable-tests)
+set (CFLAGS ${CMAKE_C_FLAGS})
+set (LDFLAGS ${CMAKE_EXE_LINKER_FLAGS})
 if(CMAKE_SYSTEM_PROCESSOR MATCHES "arm|ARM")
-   set (CONFIGURE CC=${CMAKE_C_COMPILER} ${CONFIGURE} --host=arm  )
+   set (CFLAGS "${CFLAGS} --sysroot=${CMAKE_SYSROOT}")
+endif()
+
+set (CONFIGURE ./configure CFLAGS=${CFLAGS} LDFLAGS=${LDFLAGS} --prefix=${BUILD_DIR}  --enable-static --disable-shared --disable-tests)
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "arm|ARM")
+   set (CONFIGURE CC=${CMAKE_C_COMPILER} ${CONFIGURE} --host=arm )
 endif()
 
 # autotools (autogen.sh) are supposed to run from source directory,
