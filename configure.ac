@@ -149,7 +149,7 @@ AC_ARG_ENABLE(tests,
 	AS_HELP_STRING([--disable-tests],
 	[Build tests (default: yes)]),,
 	[enable_tests=yes])
-AM_CONDITIONAL(BUILD_TESTS, [test $enable_tests != no])
+AM_CONDITIONAL(WITH_TESTS, [test $enable_tests != no])
 
 AC_CONFIG_HEADERS([config.h tests/unit-test.h])
 AC_CONFIG_FILES([
