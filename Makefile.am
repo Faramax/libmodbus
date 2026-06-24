@@ -11,6 +11,6 @@ dist_doc_DATA = MIGRATION README.md
 
 SUBDIRS = src doc
 
-if BUILD_TESTS
+if WITH_TESTS
 SUBDIRS += tests
 endif
